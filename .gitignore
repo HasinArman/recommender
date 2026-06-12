@@ -1,0 +1,17 @@
+/.composer-cache
+/.composer-home
+/node_modules
+/public/build
+/public/hot
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/storage/*.key
+/storage/pail
+/database/*.sqlite
