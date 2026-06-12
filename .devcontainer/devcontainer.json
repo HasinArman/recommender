@@ -1,10 +1,9 @@
 {
     "name": "TrialMatch",
-    "image": "mcr.microsoft.com/devcontainers/php:1-8.3-bookworm",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "features": {
-        "ghcr.io/devcontainers/features/node:1": {
-            "version": "22"
-        },
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": true,
             "upgradePackages": true
@@ -20,7 +19,6 @@
         }
     },
     "postCreateCommand": "bash .devcontainer/setup.sh",
-    "postAttachCommand": "bash -c 'command -v node >/dev/null || echo \"WARNING: Node.js missing — press Ctrl+Shift+P and run: Dev Containers: Rebuild Container\"'",
     "forwardPorts": [8000, 5173],
     "portsAttributes": {
         "8000": {

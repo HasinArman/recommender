@@ -3,6 +3,8 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+bash .devcontainer/install-tools.sh
+
 if [ ! -f .env ] || [ ! -d vendor ] || [ ! -d node_modules ]; then
     echo "==> First-time setup required..."
     bash .devcontainer/setup.sh

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+cd "$(dirname "$0")/.."
+
+bash .devcontainer/install-tools.sh
+
 echo "==> Installing PHP dependencies..."
 composer install --no-interaction --prefer-dist
 
