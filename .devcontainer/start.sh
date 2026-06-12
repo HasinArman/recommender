@@ -22,6 +22,12 @@ rm -f public/hot
 
 php artisan optimize:clear --no-interaction 2>/dev/null || php artisan config:clear
 
+# Verify asset URLs will be relative (not localhost).
+if [ -f public/hot ]; then
+    echo "ERROR: public/hot still exists — delete it: rm -f public/hot"
+    exit 1
+fi
+
 echo ""
 echo "Starting TrialMatch..."
 if [ -n "${CODESPACE_NAME:-}" ] && [ -n "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}" ]; then

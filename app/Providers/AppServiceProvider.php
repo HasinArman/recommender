@@ -2,25 +2,36 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        if (getenv('CODESPACE_NAME') && is_file(public_path('hot'))) {
+        if (is_file(public_path('hot')) && getenv('CODESPACE_NAME')) {
             @unlink(public_path('hot'));
+        }
+
+        // Relative /build/... paths work in Codespaces (APP_URL=localhost breaks absolute asset URLs).
+        Vite::createAssetPathsUsing(
+            fn (string $path) => '/'.ltrim($path, '/')
+        );
+
+        if ($this->app->runningInConsole() || ! getenv('CODESPACE_NAME')) {
+            return;
+        }
+
+        $request = request();
+
+        if ($request->getHost()) {
+            URL::forceRootUrl($request->getSchemeAndHttpHost());
         }
     }
 }
