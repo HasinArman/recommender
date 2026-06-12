@@ -3,24 +3,12 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client",
-                "bradlc.vscode-tailwindcss",
-                "dbaeumer.vscode-eslint"
-            ]
-        }
-    },
     "postCreateCommand": "bash .devcontainer/setup.sh",
-    "forwardPorts": [8000, 5173],
+    "forwardPorts": [8000],
     "portsAttributes": {
         "8000": {
-            "label": "TrialMatch (Laravel)",
+            "label": "TrialMatch",
             "onAutoForward": "openBrowser"
-        },
-        "5173": {
-            "label": "Vite dev server"
         }
     },
     "remoteUser": "vscode"

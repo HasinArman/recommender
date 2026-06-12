@@ -11,49 +11,18 @@ Healthcare recommender system for **FWP-3 Data Analysis and Data Mining**. Users
 3. View **ranked clinical trials** with match % and reasons  
 4. Open trial detail → link to ClinicalTrials.gov  
 
-## Quick start (local)
-
-```bash
-cp .env.example .env
-php artisan key:generate
-touch database/database.sqlite
-php artisan migrate:fresh --seed
-npm install
-npm run dev
-```
-
-```bash
-php artisan serve --port=8002
-```
-
-Open **http://127.0.0.1:8002**
-
 ## GitHub Codespaces
 
-1. Push repo to GitHub
-2. **Code** → **Codespaces** → **Create codespace on main**
-3. Wait for auto-setup (`.devcontainer` runs migrate + seed + build)
-4. In terminal:
+1. Open the repo on GitHub
+2. Click **Code** → **Codespaces** → **Create codespace on main**
+3. Wait until the terminal shows **TrialMatch is ready!**
+4. Start the app:
 
 ```bash
 bash .devcontainer/start.sh
 ```
 
-5. Open the forwarded **port 8000** URL in the browser
-
-Do **not** run `npm run dev` in Codespaces — it causes a blank page because the browser cannot reach Vite on `localhost:5173`. Assets are pre-built during setup.
-
-SQLite DB is created automatically with demo data.
-
-**If you see `composer: command not found` or recovery mode:** pull latest, then rebuild:
-
-1. **Ctrl+Shift+P** → **Codespaces: Rebuild Container**
-2. Wait for setup to finish (watch terminal for `TrialMatch is ready!`)
-3. Run:
-
-```bash
-bash .devcontainer/start.sh
-```
+5. Open the **port 8000** URL (Ports tab, or the browser tab that opens)
 
 ### Demo account
 
@@ -61,7 +30,24 @@ bash .devcontainer/start.sh
 |-------|----------|
 | demo@trialmatch.test | password |
 
-(Demo user already has a health profile — goes straight to trial results.)
+### If the codespace fails to build
+
+**Ctrl+Shift+P** → **Codespaces: Rebuild Container**, then run `bash .devcontainer/start.sh` again.
+
+## Local development
+
+```bash
+cp .env.example .env
+composer install
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate:fresh --seed
+npm install
+npm run build
+php artisan serve
+```
+
+For hot reload locally, run `npm run dev` in a second terminal.
 
 ## Algorithm (content-based / profile matching)
 
