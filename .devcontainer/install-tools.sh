@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-MIN_PHP="8.4.1"
+MIN_PHP="8.3.0"
 
 php_version_ok() {
     command -v php >/dev/null 2>&1 \
@@ -27,14 +27,13 @@ else
 fi
 
 fix_apt_sources() {
-    # Some PHP devcontainer images ship a broken Yarn apt repo (GPG errors).
     $SUDO rm -f /etc/apt/sources.list.d/yarn.list /etc/apt/sources.list.d/yarn*.list 2>/dev/null || true
 }
 
-install_php_84() {
+install_php() {
     fix_apt_sources
 
-    echo "==> Installing PHP 8.4..."
+    echo "==> Installing PHP 8.3..."
     $SUDO apt-get update -qq
     $SUDO apt-get install -y lsb-release ca-certificates curl apt-transport-https unzip git
 
@@ -47,12 +46,12 @@ install_php_84() {
 
     $SUDO apt-get update -qq
     $SUDO apt-get install -y \
-        php8.4-cli php8.4-sqlite3 php8.4-mbstring php8.4-xml php8.4-curl \
-        php8.4-zip php8.4-bcmath php8.4-tokenizer php8.4-dom
+        php8.3-cli php8.3-sqlite3 php8.3-mbstring php8.3-xml php8.3-curl \
+        php8.3-zip php8.3-bcmath php8.3-tokenizer php8.3-dom
 
-    if [ -x /usr/bin/php8.4 ]; then
-        $SUDO update-alternatives --install /usr/bin/php php /usr/bin/php8.4 84 2>/dev/null || true
-        $SUDO update-alternatives --set php /usr/bin/php8.4 2>/dev/null || true
+    if [ -x /usr/bin/php8.3 ]; then
+        $SUDO update-alternatives --install /usr/bin/php php /usr/bin/php8.3 83 2>/dev/null || true
+        $SUDO update-alternatives --set php /usr/bin/php8.3 2>/dev/null || true
     fi
 }
 
@@ -78,12 +77,8 @@ install_node() {
         | $SUDO tar -xJ -C /usr/local --strip-components=1
 }
 
-if command -v php >/dev/null 2>&1 && ! php_version_ok; then
-    echo "==> PHP $(php -r 'echo PHP_VERSION;') is too old; need $MIN_PHP+"
-fi
-
 if ! php_version_ok; then
-    install_php_84
+    install_php
 fi
 
 install_composer
@@ -91,7 +86,7 @@ install_node
 
 if ! php_version_ok || ! has_composer || ! has_node_tools; then
     echo ""
-    echo "ERROR: Could not prepare PHP 8.4, Composer, and Node.js."
+    echo "ERROR: Could not prepare PHP, Composer, and Node.js."
     echo "Try: Ctrl+Shift+P -> Codespaces: Rebuild Container"
     exit 1
 fi
