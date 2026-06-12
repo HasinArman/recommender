@@ -33,15 +33,23 @@ Open **http://127.0.0.1:8002**
 1. Push repo to GitHub
 2. **Code** → **Codespaces** → **Create codespace on main**
 3. Wait for auto-setup (`.devcontainer` runs migrate + seed + build)
-4. In terminal:
+4. In terminal, start Laravel + Vite in **one command**:
 
 ```bash
-php artisan serve --host=0.0.0.0 --port=8000
+bash .devcontainer/start.sh
+```
+
+Or, if setup already finished:
+
+```bash
+npm start
 ```
 
 5. Open the forwarded **port 8000** URL in the browser
 
 SQLite DB is created automatically with demo data.
+
+**If you see `npx: command not found` or `npm: command not found`:** the dev container did not load. Press **Ctrl+Shift+P** → **Dev Containers: Rebuild Container**, then run `bash .devcontainer/start.sh` again.
 
 ### Demo account
 

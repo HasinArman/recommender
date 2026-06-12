@@ -20,6 +20,7 @@
         }
     },
     "postCreateCommand": "bash .devcontainer/setup.sh",
+    "postAttachCommand": "bash -c 'command -v node >/dev/null || echo \"WARNING: Node.js missing — press Ctrl+Shift+P and run: Dev Containers: Rebuild Container\"'",
     "forwardPorts": [8000, 5173],
     "portsAttributes": {
         "8000": {

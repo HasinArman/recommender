@@ -26,6 +26,6 @@ npm run build
 
 echo ""
 echo "TrialMatch is ready!"
-echo "  Run: php artisan serve --host=0.0.0.0 --port=8000"
-echo "  Dev: npm run dev  (optional, for hot reload)"
+echo "  Start app (one terminal): bash .devcontainer/start.sh"
+echo "  Or after npm install:     npm start"
 echo "  Demo login: demo@trialmatch.test / password"
