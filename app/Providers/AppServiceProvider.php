@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (getenv('CODESPACE_NAME') && is_file(public_path('hot'))) {
+            @unlink(public_path('hot'));
+        }
     }
 }

@@ -10,18 +10,25 @@ if [ ! -f .env ] || [ ! -d vendor ] || [ ! -d node_modules ]; then
     bash .devcontainer/setup.sh
 fi
 
-# Vite dev server uses localhost:5173 — that breaks in Codespaces (blank page).
-# Use production assets built into public/build instead.
+bash .devcontainer/configure-env.sh
+
+# Vite dev server writes public/hot → browser loads localhost:5173 → blank page in Codespaces.
+pkill -f "[v]ite" 2>/dev/null || true
 rm -f public/hot
 
-if [ ! -f public/build/manifest.json ]; then
-    echo "==> Building frontend assets..."
-    npm run build
-fi
+echo "==> Building frontend assets for Codespaces..."
+npm run build
+rm -f public/hot
+
+php artisan optimize:clear --no-interaction 2>/dev/null || php artisan config:clear
 
 echo ""
 echo "Starting TrialMatch..."
-echo "  Open the forwarded port 8000 URL in your browser"
+if [ -n "${CODESPACE_NAME:-}" ] && [ -n "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}" ]; then
+    echo "  https://${CODESPACE_NAME}-8000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+else
+    echo "  http://localhost:8000"
+fi
 echo "  Demo: demo@trialmatch.test / password"
 echo ""
 

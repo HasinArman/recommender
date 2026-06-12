@@ -15,6 +15,8 @@ fi
 
 php artisan key:generate --force
 
+bash .devcontainer/configure-env.sh
+
 echo "==> Creating SQLite database..."
 mkdir -p database
 touch database/database.sqlite
@@ -27,6 +29,7 @@ npm install --no-fund --no-audit
 
 echo "==> Building frontend assets..."
 npm run build
+rm -f public/hot
 
 echo ""
 echo "TrialMatch is ready!"
