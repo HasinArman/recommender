@@ -23,7 +23,7 @@ else
 fi
 
 if ! has_php_tools; then
-    echo "==> Installing PHP 8.3 and Composer..."
+    echo "==> Installing PHP 8.4 and Composer..."
     $SUDO apt-get update
     $SUDO apt-get install -y lsb-release ca-certificates curl apt-transport-https unzip git
 
@@ -36,8 +36,8 @@ if ! has_php_tools; then
 
     $SUDO apt-get update
     $SUDO apt-get install -y \
-        php8.3-cli php8.3-sqlite3 php8.3-mbstring php8.3-xml php8.3-curl \
-        php8.3-zip php8.3-bcmath php8.3-tokenizer php8.3-dom
+        php8.4-cli php8.4-sqlite3 php8.4-mbstring php8.4-xml php8.4-curl \
+        php8.4-zip php8.4-bcmath php8.4-tokenizer php8.4-dom
 
     if ! command -v composer >/dev/null 2>&1; then
         curl -sS https://getcomposer.org/installer | php

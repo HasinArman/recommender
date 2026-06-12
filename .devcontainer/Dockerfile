@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/php:1-8.3-bookworm
+FROM mcr.microsoft.com/devcontainers/php:1-8.4-bookworm
 
 # Install Node.js from official binaries (avoids apt/yarn repo GPG conflicts in this image).
 ARG NODE_VERSION=22.16.0
