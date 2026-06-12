@@ -30,6 +30,6 @@ npm run build
 
 echo ""
 echo "TrialMatch is ready!"
-echo "  Start app (one terminal): bash .devcontainer/start.sh"
-echo "  Or after npm install:     npm start"
+echo "  Start app: bash .devcontainer/start.sh"
+echo "  (Uses built assets — open port 8000 only; do not use npm run dev in Codespaces)"
 echo "  Demo login: demo@trialmatch.test / password"

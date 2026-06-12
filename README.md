@@ -33,19 +33,15 @@ Open **http://127.0.0.1:8002**
 1. Push repo to GitHub
 2. **Code** → **Codespaces** → **Create codespace on main**
 3. Wait for auto-setup (`.devcontainer` runs migrate + seed + build)
-4. In terminal, start Laravel + Vite in **one command**:
+4. In terminal:
 
 ```bash
 bash .devcontainer/start.sh
 ```
 
-Or, if setup already finished:
-
-```bash
-npm start
-```
-
 5. Open the forwarded **port 8000** URL in the browser
+
+Do **not** run `npm run dev` in Codespaces — it causes a blank page because the browser cannot reach Vite on `localhost:5173`. Assets are pre-built during setup.
 
 SQLite DB is created automatically with demo data.
 
