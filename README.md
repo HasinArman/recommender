@@ -49,14 +49,15 @@ npm start
 
 SQLite DB is created automatically with demo data.
 
-**If you see `composer: command not found` or `npx: command not found`:** pull latest, then run:
+**If you see `composer: command not found` or recovery mode:** pull latest, then rebuild:
+
+1. **Ctrl+Shift+P** → **Codespaces: Rebuild Container**
+2. Wait for setup to finish (watch terminal for `TrialMatch is ready!`)
+3. Run:
 
 ```bash
-git pull
 bash .devcontainer/start.sh
 ```
-
-That installs PHP, Composer, and Node automatically. If it still fails, press **Ctrl+Shift+P** → **Codespaces: Rebuild Container**, then run `bash .devcontainer/start.sh` again.
 
 ### Demo account
 
